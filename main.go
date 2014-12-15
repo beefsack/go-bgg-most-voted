@@ -27,9 +27,9 @@ func main() {
 	}); err != nil {
 		stderr.Fatalf("Error writing line of CSV, %v", err)
 	}
-	for page := 1; page <= 10; page++ {
+	for page := 1; page <= 5; page++ {
 		url := fmt.Sprintf(
-			"http://boardgamegeek.com/search/boardgame/page/%d?sort=numvoters&advsearch=1&sortdir=desc",
+			"http://boardgamegeek.com/search/boardgame/page/%d?sort=numvoters&advsearch=1&sortdir=desc&nosubtypes%%5B0%%5D=boardgameexpansion",
 			page,
 		)
 		r, err := client.AdvSearch(url)
@@ -50,6 +50,7 @@ func main() {
 			}); err != nil {
 				stderr.Fatalf("Error writing line of CSV, %v", err)
 			}
+			w.Flush()
 		}
 	}
 }
